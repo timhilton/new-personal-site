@@ -11,10 +11,8 @@
 
     @media (max-width: 734px) {
         height: 70%;
-        margin-top: -7em;
         padding-bottom: 5em;
-        padding-top: 6em;
-        width: 100%;
+        width: calc(100% - 48px);
     }
 }
 
@@ -63,6 +61,7 @@ input[name='email'][value='']:invalid:focus {
 }
 
 label {
+    font-family: 'OpenSans';
     align-items: center;
     display: flex;
     font-size: 1em;
@@ -104,10 +103,6 @@ button {
     text-transform: uppercase;
     transition: 0.3s ease all;
     width: max-content;
-
-    @media (max-width: 734px) {
-        margin-top: -1em;
-    }
 }
 
 button:hover {
