@@ -22,7 +22,7 @@ const pageTitle = "Tim Hilton"
 		<title>{pageTitle} - {title}</title>
 		<ViewTransitions />
 	</head>
-	<body transition:animate="none">
+	<body>
 		<main class="container">
 			<section class="content">
 				<slot />
@@ -31,9 +31,3 @@ const pageTitle = "Tim Hilton"
 		</main>
 	</body>
 </html>
-<style is:global>
-	.container {
-		position: relative;
-		min-height: 100vh;
-	}
-</style>
