@@ -10,6 +10,7 @@ const pageLinks = links.map((link) => {
     return {
         name: `${link.toUpperCase()}`,
         path: `/${link.toLowerCase()}`,
+        aria: `Go to ${link} page`
     }
 })
 
@@ -19,7 +20,7 @@ const transitionName = `${title.toLowerCase()}`
     <a class="page-link" href="/">TIM&nbsp;HILTON</a>
     <div class="page-links">  
         {pageLinks.map((link) => {
-            return <a class="page-link" href={link.path}>{link.name}</a>
+            return <a class="page-link" href={link.path} aria-label={link.aria}>{link.name}</a>
         })}
     </div>
 </nav>

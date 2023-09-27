@@ -3,10 +3,31 @@ import Icon from './Icon.astro';
 import A from './A.astro';
 
 const icons = [
-    'github',
-    'linkedin',
-    'resume',
-    'spotify'
+    {
+        name: 'github',
+        link: 'https://github.com/timhilton',
+        aria: 'link to github, opens in new tab'
+    },
+    {
+        name: 'codepen',
+        link: 'https://codepen.io/timhilton',
+        aria: 'link to codepen, opens in new tab'
+    },
+    {
+        name: 'linkedin',
+        link: 'https://www.linkedin.com/in/timhiltontech/',
+        aria: 'link to linkedin, opens in new tab'
+    },
+    {
+        name: 'resume',
+        link: 'https://s3.amazonaws.com/www.timhilton.net/TimHiltonResume2023.pdf',
+        aria: 'link to resume, opens in new tab'
+    },
+    {
+        name: 'spotify',
+        link: 'https://open.spotify.com/user/timhilton79?si=b43fa44a6b2a4352',
+        aria: 'link to spotify, opens in new tab for you to rock out!'
+    }
 ]
 ---
 <style>
@@ -18,7 +39,7 @@ const icons = [
       position: absolute;
       bottom: 0;
       width: calc(100% - 48px);
-      color: #f5f5f5;
+      color: var(--text);
       margin-inline-start: 24px;
     }
 
@@ -70,7 +91,7 @@ const icons = [
     </div>
     <p>&#169; {new Date().getFullYear()} Tim Hilton</p>
     <div class="social">
-    {icons.map((icon) => <a href="#"><Icon icon={icon}/></a>)}
+    {icons.map((icon) => <a href={icon.link} target="_blank" aria-label={icon.aria}><Icon icon={icon.name}/></a>)}
     </div>
     </div>
 </footer>

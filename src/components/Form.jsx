@@ -104,10 +104,10 @@ export default function Contact() {
                 <label htmlFor="message">Message</label>
             </div>
 
-            <button type="submit">Let&#39;s Talk</button>
+            <button type="submit" aria-label="send your email and let's talk!">Let&#39;s Talk</button>
             </form>
 }
-            {submitted && <p className="successMessage">Thank you for your message! I look forward to speaking with you!</p>}
+            {submitted && <p className="successMessage">Thank you for your message! I look forward to speaking with you! <a href="/" aria-label="go back to home page">Back to home page.</a></p>}
         </section>
     );
 }

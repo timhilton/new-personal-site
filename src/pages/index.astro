@@ -6,10 +6,10 @@ import me from "../images/tim.jpg";
 ---
 <Layout title="Home">
 	<article class="home-nav">
-			<h1 transition:animate={fade({duration: '0.5s'})} href="/">TIM&nbsp;HILTON</h1>
-			<a transition:name="about" href="/about">ABOUT</a>
-			<a transition:name="work" href="/work">WORK</a>
-			<a transition:name="contact" href="/contact">CONTACT</a>
+			<h1 transition:animate={fade({duration: '0.5s'})}>TIM&nbsp;HILTON</h1>
+			<a transition:name="about" href="/about" aria-label="go to about page">ABOUT</a>
+			<a transition:name="work" href="/work" aria-label="go to work page">WORK</a>
+			<a transition:name="contact" href="/contact" aria-label="go to work page">CONTACT</a>
 
 			<div transition:name="portrait" class="img-wrap">
 				<Image src={me} alt="Tim Hilton" class="portrait"/>
@@ -31,7 +31,7 @@ import me from "../images/tim.jpg";
 	.home-nav a, .home-nav h1 {
 		text-decoration: none;
 		position: relative;
-		color: #f5f5f5;
+		color: var(--text);
 		font-family: 'Galano', sans-serif;
 		font-size: 6em;
 		font-weight: 300;
@@ -48,7 +48,7 @@ import me from "../images/tim.jpg";
 		content: '';
 		position: absolute;
 		height: 1px;
-		background: #f5f5f5;
+		background: var(--text);
 		width: 100%;
 		left: 0;
 		margin-top: 0.95em;

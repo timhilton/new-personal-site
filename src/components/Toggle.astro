@@ -1,0 +1,215 @@
+---
+import Sun from './svg/Sun.astro';
+import Moon from './svg/Moon.astro';
+const text = '#1d1d1f';
+const background = "f5f5f5";
+---
+
+<div class="toggle-wrap" transition:persist>
+    <Sun />
+    <div class="check">
+        <input class="checkbox" type="checkbox" id="check" />
+        <label class="switch" for="check" id="labelled">Toggle Light and Dark Modes</label>
+    </div>
+    <Moon />
+</div>
+
+<!-- <script>
+    const checkbox = document.querySelector("#switch");
+
+    const mode = (() => {
+        if (typeof localStorage !== 'undefined' && localStorage.getItem('mode')) {
+            return localStorage.getItem('mode');
+        }
+        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            checkbox.checked = false;
+            return 'dark';
+        }
+
+        checkbox.checked = true;
+        return 'light';
+    })();
+
+    if (mode === 'light') {
+        document.documentElement.classList.remove('dark');
+    } else {
+        document.documentElement.classList.add('dark');
+    }
+
+    window.localStorage.setItem('mode', mode);
+
+    const handleToggleClick = () => {
+        const element = document.documentElement;
+
+        checkbox.checked = !checkbox.checked;
+        element.classList.toggle("dark");
+
+        const isDark = element.classList.contains("dark");
+        localStorage.setItem("mode", isDark ? "dark" : "light");
+    }
+
+    const setMode = () => {
+        document.querySelector(".switch").addEventListener("click", handleToggleClick);
+    }
+
+    setMode()
+    document.addEventListener('astro:after-swap', setMode);
+</script> -->
+
+<script>
+const themeLabel = document.querySelector('#labeled');
+const checkbox = document.querySelector('#check');
+
+function getUserPreference() {
+    return localStorage.getItem('theme') || 'system'
+}
+
+function setUserPreference(userPreference) {
+    localStorage.setItem('theme', userPreference);
+}
+
+function getTheme(userPreference) {
+    // User selects light
+    if (userPreference === 'light') {
+        return 'light';
+    }
+
+    // User selects dark
+    if (userPreference === 'dark') {
+        return 'dark';
+    }
+
+    // system is set to light
+    if (matchMedia('(prefers-color-scheme: light)').matches) {
+        return 'light';
+    }
+
+    // default is to dark
+    return 'dark';
+}
+
+function setTheme(theme) {
+    document.documentElement.dataset.theme = theme;
+}
+
+function initialLoad() {
+    const pref = getTheme(getUserPreference());
+    setTheme(pref);
+
+    if (pref === 'dark') {
+        checkbox.checked = true;
+    }
+}
+
+function toggleTheme() {
+  checkbox.addEventListener('change', () => {
+    if (checkbox.checked) {
+        setUserPreference('dark');
+    } else {
+        setUserPreference('light');
+    }
+    let newUserPref = getUserPreference();
+    setTheme(newUserPref);
+  })
+}
+
+initialLoad();
+toggleTheme();
+document.addEventListener('astro:after-swap', () => {
+    toggleTheme(),
+    initialLoad()
+});
+</script>
+
+
+<style>
+    .toggle-wrap {
+        position: absolute;
+        top: 26px;
+        right: 48px;
+        z-index: 5;
+        display: grid;
+        grid-template-columns: 25px 50px 18px;
+        grid-gap: 12px;
+        align-items: center;
+
+        @media (max-width: 768px) {
+            top: 12px;
+            right: 24px;
+            grid-template-columns: 20px 35px 16px;
+            grid-gap: 8px;
+        }
+    }
+
+    svg:first-of-type {
+        height: 25px;
+
+        @media (max-width: 768px) {
+            height: 20px;
+        }
+    }
+
+    svg:last-of-type {
+        height: 18px;
+
+        @media (max-width: 768px) {
+            height: 13px;
+        }
+    }
+
+    .check {
+        height: 25px;
+        position: relative;
+
+        @media (max-width: 768px) {
+            height: 20px;
+        }
+    }
+
+    .switch {
+        cursor: pointer;
+        text-indent: -9999px;
+        width: 50px;
+        height: 25px;
+        background: transparent;
+        display: block;
+        border-radius: 100px;
+        position: absolute;
+        top: 0;
+        border: 1px solid var(--text);
+        transition: border 300ms;
+
+        @media (max-width: 768px) {
+            width: 35px;
+            height: 20px;
+        }
+    }
+
+    .switch:after {
+        content: '';
+        position: absolute;
+        top: 1.25px;
+        left: 1.25px;
+        width: 20.25px;
+        height: 20.25px;
+        background: var(--text);
+        border-radius: 90px;
+        transition: 0.3s;
+
+        @media (max-width: 768px) {
+            width: 15px;
+            height: 15px;
+        }
+    }
+
+    .checkbox {
+        height: 0;
+        width: 0;
+        visibility: hidden;
+    }
+
+    .checkbox:checked + label::after {
+        left: calc(100% - 1.5px);
+        transform: translateX(-100%);
+    }
+</style>
