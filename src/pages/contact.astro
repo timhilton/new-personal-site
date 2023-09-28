@@ -6,7 +6,7 @@ import Form from '../components/Form.jsx';
 const title="CONTACT";
 const links = ['About', 'Work'];
 ---
-<Layout>
+<Layout title={title}>
     <Navigation title={title} links={links}/>
     <section transition:animate="slide">
         <Form client:load/>

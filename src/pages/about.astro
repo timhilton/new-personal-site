@@ -17,7 +17,7 @@ const entries = await contentfulClient.getEntries<AboutContent>({
 const { about } = entries.items[0].fields;
 const elevatorPitchHtml = documentToHtmlString(about);
 ---
-<Layout>
+<Layout title={title}>
     <Navigation title={title} links={links}/>
     <div class="about-container">
         <article class="about-text" set:html={elevatorPitchHtml} transition:animate="slide"/>
