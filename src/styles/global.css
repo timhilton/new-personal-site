@@ -93,6 +93,10 @@ a {
     flex-direction: column;
     margin: 0 auto;
     padding-bottom: 8em;
+
+    @media (max-width: 768px) {
+        padding-bottom: 9.5em;
+    }
 }
 
 h2 {

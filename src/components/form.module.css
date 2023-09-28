@@ -6,13 +6,15 @@
     height: fit-content;
     justify-content: center;
     pointer-events: auto;
-    width: calc(50% - 72px);
+    width: calc(100% - 72px);
+    max-width: 692px;
     margin: 24px auto;
 
     @media (max-width: 734px) {
         height: 70%;
         padding-bottom: 5em;
         width: calc(100% - 48px);
+        max-width: 100%;
     }
 }
 
