@@ -8,7 +8,7 @@ import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
 import type { AboutContent } from "../lib/contentful";
 
 const title="ABOUT";
-const links = ['Work', 'Contact'];
+const links = ['Content', 'Contact'];
 
 const entries = await contentfulClient.getEntries<AboutContent>({
     content_type: "home",
