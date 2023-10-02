@@ -12,6 +12,6 @@ const { filters } = Astro.props
 ---
 <Layout title={title}>
     <Navigation title={title} links={links}/>
-    <TechFilters items={filters}/>
+    <TechFilters items={filters} transition:animate="none"/>
     <slot/>
 </Layout>
