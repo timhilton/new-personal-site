@@ -1,0 +1,17 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navigation from '../components/Navigation.astro';
+import WorkItem from '../components/WorkItem.astro';
+import TechFilters from '../components/TechFilters.astro';
+
+const title="WORK";
+const links = ['About', 'Contact'];
+
+const { filters } = Astro.props
+
+---
+<Layout title={title}>
+    <Navigation title={title} links={links}/>
+    <TechFilters items={filters}/>
+    <slot/>
+</Layout>

@@ -1,0 +1,60 @@
+---
+import WorkLayout from "../../../layouts/WorkLayout.astro";
+import WorkItem from "../../../components/WorkItem.astro";
+import { contentfulClient } from "../../../lib/contentful";
+import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
+import type { PortfolioItem } from "../../../lib/contentful";
+
+export async function getStaticPaths() {
+    const entries = await contentfulClient.getEntries<PortfolioItem>({
+        content_type: "portfolioItem",
+    });
+
+    let uniqueTags = [...new Set(entries.items.map((item) => item.fields.tech).flat())];
+    uniqueTags.unshift("all");
+ 
+    return uniqueTags.map((tag) => {
+        const filteredItems = entries.items.filter((item) => item.fields.tech.includes(tag));
+        return {
+            params: { tag },
+            props: { 
+                items: filteredItems,
+                filters: uniqueTags
+            },
+        }
+    })
+}
+  
+const { tag } = Astro.params;
+const { items, filters } = Astro.props;
+---
+
+<WorkLayout filters={filters}>
+    <ul class="portfolio-list">
+        {items.map((item) => (
+            <li transition:name={item.fields.project}><WorkItem project={item.fields.project} description={item.fields.description} slug={item.fields.slug} tech={item.fields.tech} role={item.fields.role} demoUrl={item.fields.demoUrl} imageUrl={item.fields.imageUrl}/></li>
+        ))}
+    </ul>
+</WorkLayout>
+
+
+<style>
+    .portfolio-list {
+        display: flex;
+        list-style: none;
+        flex-wrap: wrap;
+        padding: 0;
+        margin: 0;
+    
+        @media (max-width: 768px) {
+            flex-direction: column;
+        }
+    }
+    
+    li {
+        @media (max-width: 768px) {
+            width: 100%;
+            position: relative;
+        }
+    }
+</style>

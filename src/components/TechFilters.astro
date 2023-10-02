@@ -1,23 +1,16 @@
 ---
-const filters = [
-    'React',
-    'Vue',
-    'Astro',
-    'Styled Components',
-    'SCSS',
-    'Nunjucks',
-    'Next.js',
-    'Netlify',
-    'Contentful',
-    'AEM'
-]
+const {items} = Astro.props;
 ---
 
 <h3>Filters</h3>
 <nav class="filter-nav">
     <ul class="filter-nav-container">
-        {filters.map((filter) => {
-            return <li class="filter-nav__item tech"><a href="#" class="filter-nav-link">{ filter }</a></li>
+        {items.map((filter) => {
+            if (filter === 'all') {
+                return <li class="filter-nav__item tech"><a href={`/work`} class="filter-nav-link">{ filter }</a></li>
+            } else {
+                return <li class="filter-nav__item tech"><a href={`/work/tags/${filter}`} class="filter-nav-link">{ filter }</a></li>
+            }
         })}
     </ul>
 </nav>
