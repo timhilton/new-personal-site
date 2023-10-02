@@ -1,0 +1,30 @@
+---
+import { contentfulClient } from "../../lib/contentful";
+import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
+import type { PortfolioItem } from "../../lib/contentful";
+
+export async function getStaticPaths() {
+    const entries = await contentfulClient.getEntries<PortfolioItem>({
+        content_type: "portfolioItem",
+    });
+
+    const pages = entries.items.map((item) => ({
+        params: { slug: item.fields.slug },
+        props: {
+            project: item.fields.project,
+            description: item.fields.description,
+            tech: item.fields.tech,
+            role: item.fields.role,
+            demoUrl: item.fields.demoUrl,
+            imageUrl: item.fields.imageUrl
+        },
+    }));
+    return pages;
+}
+
+const { project, description, tech, role, demoUrl, imageUrl } = Astro.props
+---
+
+<div>
+    <h2>This is a {project} case study page</h2>
+</div>

@@ -7,6 +7,19 @@ export interface AboutContent {
   }
 }
 
+export interface PortfolioItem {
+  contentTypeId: "portfolioItem",
+  fields: {
+    project: EntryFieldTypes.Text,
+    description: EntryFieldTypes.Text,
+    url: EntryFieldTypes.Text,
+    tech: EntryFieldTypes.Array<EntryFieldTypes.Text>,
+    role: EntryFieldTypes.Text,
+    demoUrl: EntryFieldTypes.Text,
+    imageUrl: EntryFieldTypes.Text
+  }
+}
+
 export const contentfulClient = contentful.createClient({
   space: import.meta.env.CONTENTFUL_SPACE_ID,
   accessToken: import.meta.env.DEV

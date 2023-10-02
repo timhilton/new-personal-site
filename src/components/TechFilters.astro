@@ -1,0 +1,59 @@
+---
+const filters = [
+    'React',
+    'Vue',
+    'Astro',
+    'Styled Components',
+    'SCSS',
+    'Nunjucks',
+    'Next.js',
+    'Netlify',
+    'Contentful',
+    'AEM'
+]
+---
+
+<h3>Filters</h3>
+<nav class="filter-nav">
+    <ul class="filter-nav-container">
+        {filters.map((filter) => {
+            return <li class="filter-nav__item tech"><a href="#" class="filter-nav-link">{ filter }</a></li>
+        })}
+    </ul>
+</nav>
+
+<style>
+.filter-nav-container {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    gap: .5em;
+    padding: 0;
+    margin: 12px 12px 48px 12px;
+}
+
+h3 {
+    margin-left: 24px;
+    font-family: 'Galano', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text);
+}
+
+.tech {
+    margin: 0 0.5rem;
+    padding: 0.1rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 50px;
+    box-shadow: 0 0 5px #ccc;
+    width: fit-content;
+}
+
+.tech a {
+    color: var(--text);
+    text-decoration: none;
+    text-transform: uppercase;
+    font-family: 'Galano', sans-serif;
+}
+</style>
+```

@@ -1,12 +1,58 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Navigation from '../components/Navigation.astro';
+import { contentfulClient } from "../lib/contentful";
+import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
+import type { PortfolioItem } from "../lib/contentful";
+import WorkItem from '../components/WorkItem.astro';
+import TechFilters from '../components/TechFilters.astro';
 
 const title="WORK";
 const links = ['About', 'Contact'];
 
+const entries = await contentfulClient.getEntries<PortfolioItem>({
+    content_type: "portfolioItem",
+});
+
+const items = entries.items.map((item) => {
+    return {
+        project: item.fields.project,
+        description: item.fields.description,
+        slug: item.fields.slug,
+        tech: item.fields.tech,
+        role: item.fields.role,
+        demoUrl: item.fields.demoUrl,
+        imageUrl: item.fields.imageUrl
+    };
+});
+
 ---
 <Layout title={title}>
     <Navigation title={title} links={links}/>
-    <p>This is the work page.</p>
+    <TechFilters/>
+    <ul class="portfolio-list">
+    {items.map((item) => (
+        <li><WorkItem project={item.project} description={item.description} slug={item.slug} tech={item.tech} role={item.role} demoUrl={item.demoUrl} imageUrl={item.imageUrl}/></li>
+    ))}
+    </ul>
 </Layout>
+
+<style>
+.portfolio-list {
+    display: flex;
+    list-style: none;
+    flex-wrap: wrap;
+    padding: 0;
+    margin: 0;
+
+    @media (max-width: 768px) {
+        flex-direction: column;
+    }
+}
+
+li {
+    @media (max-width: 768px) {
+        width: 100%;
+        position: relative;
+    }
+}
