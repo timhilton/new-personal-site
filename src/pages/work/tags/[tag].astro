@@ -11,6 +11,7 @@ export async function getStaticPaths() {
     });
 
     let uniqueTags = [...new Set(entries.items.map((item) => item.fields.tech).flat())];
+    uniqueTags.sort((a, b) => a.localeCompare(b))
     uniqueTags.unshift('all');
  
     return uniqueTags.map((tag) => {

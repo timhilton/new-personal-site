@@ -30,6 +30,7 @@ items = items.sort((a, b) => {
 
 
 let filterList = [...new Set(items.map(item => item.tech).flat())];
+filterList.sort((a, b) => a.localeCompare(b))
 filterList.unshift('all');
 
 ---
