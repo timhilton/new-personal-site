@@ -36,95 +36,155 @@ const links = ['work', 'about', 'contact'];
 <Layout title={project}>
     <Navigation title={project} links={links}/>
     <div class="case-study">
-    <Image src={imageUrl} alt="picture" width="512" height="512" transition:name={`${slug}-thumbnail`}/>
-    <video src={images[0]} autoplay loop>
-        <source src={images[0]} type="video/mp4" />
-    </video>
-    <Image src={images[1]} alt="picture" width="512" height="512" />
-    <Image src={images[2]} alt="picture" width="512" height="512" />
-    <Image src={images[3]} alt="picture" width="512" height="512" />
-    <Image src={images[4]} alt="picture" width="512" height="512" />
-    <p>{description}</p>
-    <p><strong>{role}</strong></p>
+        <Image src={imageUrl} alt="picture" width="512" height="512" transition:name={`${slug}-thumbnail`}/>
+        <video src={images[0]} autoplay loop muted playsinline>
+            <source src={images[0]} type="video/mp4" />
+        </video>
+        {images.map((image, index) => {
+            if (index !== 0) {
+                return <Image src={image} alt={`picture-${index}`} width="512" height="512" transition:name={`${slug}-image-${index}`}/>
+            }
+        })}
+        <p>{description}</p>
+        <p><strong>{role}</strong></p>
     </div>
 </Layout>
 
-<style>
+<style>.case-study {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(10, auto);
+    width: calc(100% - 48px);
+    margin: 0 auto;
+}
+
+@media (max-width: 768px) {
     .case-study {
-        grid-template-columns: repeat(8, 1fr);
-        grid-template-rows: repeat(10, auto);
-        display: grid;
-        width: calc(100% - 48px);
-        margin: 0 auto;
+        grid-template-columns: repeat(2, 1fr);
+        width: 100%;
+        padding: 24px;
     }
+}
+
+video {
+    grid-row-start: 2;
+    grid-row-end: 4;
+    grid-column-start: 4;
+    grid-column-end: 8;
+    width: 50vw;
+    transform: translateY(-25%);
+    z-index: 0;
+}
+
+@media (max-width: 768px) {
     video {
-        grid-row-start: 2;
-        grid-row-end: 4;
-        grid-column-start: 4;
-        grid-column-end: 8;
-        width: 50vw;
-        transform: translateY(-25%);
-        z-index: 0;
-    }
-
-    img {
-        display: flex;
-        width: 25vw;
-        height: auto;
-    }
-
-    img:nth-child(1) {
-        grid-row-start: 1;
-        grid-row-end: 1;
         grid-column-start: 1;
-        grid-column-end: 1;
-        border-radius: 12px;
-        max-width: 300px;
-    }
-
-    img:nth-child(3) {
         grid-row-start: 3;
-        grid-row-end: 5;
-        grid-column-start: 2;
-        grid-column-end: 7;
-        z-index: 2
+        width: 75%;
+        transform: translate(25%, -25%);
     }
+}
 
-    img:nth-child(4) {
-        grid-row-start: 5;
-        grid-row-end: 6;
+img {
+    display: flex;
+    width: 25vw;
+    height: auto;
+}
+
+@media (max-width: 768px) {
+    img {
+        width: 50vw;
+    }
+}
+
+img:nth-child(1) {
+    grid-row-start: 1;
+    grid-row-end: 1;
+    grid-column-start: 1;
+    grid-column-end: 1;
+    border-radius: 12px;
+    max-width: 300px;
+}
+
+img:nth-child(3) {
+    grid-row-start: 3;
+    grid-row-end: 5;
+    grid-column-start: 2;
+    grid-column-end: 7;
+    z-index: 2;
+
+    @media (max-width: 768px) {
         grid-column-start: 1;
-        grid-column-end: 4;
+        grid-row-start: 5;
     }
+}
 
-    img:nth-child(5) {
+img:nth-child(4) {
+    grid-row-start: 5;
+    grid-row-end: 6;
+    grid-column-start: 1;
+    grid-column-end: 4;
+
+    @media (max-width: 768px) {
+        grid-column-start: 2;
         grid-row-start: 7;
         grid-row-end: 9;
-        grid-column-start: 5;
-        grid-column-end: 8;
-        margin-top: 50px;
+        transform: translate(-25%, 10%);
     }
+}
 
-    img:nth-child(6) {
-        grid-row-start: 8;
-        grid-row-end: 10;
+img:nth-child(5) {
+    grid-row-start: 7;
+    grid-row-end: 9;
+    grid-column-start: 5;
+    grid-column-end: 8;
+    margin-top: 50px;
+
+    @media (max-width: 768px) {
+        grid-column-start: 1;
+        grid-row-start: 9;
+    }
+}
+
+img:nth-child(6) {
+    grid-row-start: 8;
+    grid-row-end: 10;
+    grid-column-start: 2;
+    grid-column-end: 5;
+
+    @media (max-width: 768px) {
         grid-column-start: 2;
-        grid-column-end: 5;
+        grid-row-start: 10;
+        transform: translate(-25%, -15%);
     }
+}
 
-    p:nth-child(7) {
-        grid-row-start: 5;
-        grid-column-start: 5;
-        grid-column-end: 8;
-        display: flex;
-    }
+p:nth-child(7) {
+    grid-row-start: 5;
+    grid-column-start: 5;
+    grid-column-end: 8;
+    display: flex;
 
-    p:nth-child(8) {
-        grid-row-start: 1;
-        grid-column-start: 2;
-        grid-column-end: 8;
-        display: flex;
-        margin-inline-start: 1em;
-        font-size: 2em;
+    @media (max-width: 768px) {
+        grid-column-start: 1;
+        grid-column-end: 3;
+        grid-row-start: 6;
+        font-size: 1.25em;
+        width: calc(100% - 48px);
     }
+}
+
+p:nth-child(8) {
+    grid-row-start: 1;
+    grid-column-start: 2;
+    grid-column-end: 8;
+    display: flex;
+    margin-inline-start: 1em;
+    font-size: 2em;
+
+    @media (max-width: 768px) {
+        font-size: 1.5em;
+        width: calc(100% - 48px);
+    }
+}
 </style>
