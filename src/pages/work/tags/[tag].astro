@@ -11,10 +11,15 @@ export async function getStaticPaths() {
     });
 
     let uniqueTags = [...new Set(entries.items.map((item) => item.fields.tech).flat())];
-    uniqueTags.unshift("all");
+    uniqueTags.unshift('all');
  
     return uniqueTags.map((tag) => {
-        const filteredItems = entries.items.filter((item) => item.fields.tech.includes(tag));
+        let filteredItems = entries.items.filter((item) => item.fields.tech.includes(tag));
+        
+        filteredItems = filteredItems.sort((a, b) => {
+            return a.fields.project.localeCompare(b.fields.project);
+        });
+
         return {
             params: { tag },
             props: { 

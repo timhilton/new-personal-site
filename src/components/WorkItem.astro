@@ -1,15 +1,13 @@
 ---
 import { Image } from 'astro:assets';
-const { project, description, slug, tech, role, demoUrl, imageUrl } = Astro.props;
+const { project, slug, imageUrl } = Astro.props;
 
 const path = `/work/${slug}`;
 ---
 <a href={ path } class="item">
     <div class="wrapper">
-        <Image src={imageUrl} alt="picture" width="512" height="512" />
-        
+        <Image src={imageUrl} alt="picture" width="512" height="512" transition:name={`${slug}-thumbnail`}/>
         <h2>{ project }</h2>
-        
     </div>
 <a>
 
@@ -60,13 +58,14 @@ const path = `/work/${slug}`;
     }
 
     img {
-        width: 150px;
-        height: 150px;
+        width: 300px;
+        height: auto;
+        border-radius: 12px;
 
         @media (max-width: 768px) {
             width: 100%;
+            max-width: 300px;
             height: auto;
-            border-radius: 12px;
         }
     }
     </style>

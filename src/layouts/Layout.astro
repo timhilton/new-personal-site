@@ -1,14 +1,12 @@
 ---
 import '../styles/global.css';
 import Footer from '../components/Footer.astro';
-import Toggle from '../components/Toggle.astro';
 import { ViewTransitions } from 'astro:transitions';
 interface Props {
 	title: string;
-	links: string[];
 }
 
-const { title, links } = Astro.props;
+const { title } = Astro.props;
 const pageTitle = "Tim Hilton"
 ---
 

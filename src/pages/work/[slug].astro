@@ -1,7 +1,10 @@
 ---
+import Layout from '../../layouts/Layout.astro';
+import Navigation from '../../components/Navigation.astro';
 import { contentfulClient } from "../../lib/contentful";
 import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
 import type { PortfolioItem } from "../../lib/contentful";
+import {Image} from 'astro:assets';
 
 export async function getStaticPaths() {
     const entries = await contentfulClient.getEntries<PortfolioItem>({
@@ -16,15 +19,112 @@ export async function getStaticPaths() {
             tech: item.fields.tech,
             role: item.fields.role,
             demoUrl: item.fields.demoUrl,
-            imageUrl: item.fields.imageUrl
+            imageUrl: item.fields.imageUrl,
+            slug: item.fields.slug,
+            caseStudyMedia: item.fields.caseStudyMedia,
         },
     }));
     return pages;
 }
 
-const { project, description, tech, role, demoUrl, imageUrl } = Astro.props
----
+const { project, description, slug, tech, role, demoUrl, imageUrl, caseStudyMedia } = Astro.props
 
-<div>
-    <h2>This is a {project} case study page</h2>
-</div>
+const images = caseStudyMedia.map(item => item.fields.file.url);
+
+const links = ['work', 'about', 'contact'];
+---
+<Layout title={project}>
+    <Navigation title={project} links={links}/>
+    <div class="case-study">
+    <Image src={imageUrl} alt="picture" width="512" height="512" transition:name={`${slug}-thumbnail`}/>
+    <video src={images[0]} autoplay loop>
+        <source src={images[0]} type="video/mp4" />
+    </video>
+    <Image src={images[1]} alt="picture" width="512" height="512" />
+    <Image src={images[2]} alt="picture" width="512" height="512" />
+    <Image src={images[3]} alt="picture" width="512" height="512" />
+    <Image src={images[4]} alt="picture" width="512" height="512" />
+    <p>{description}</p>
+    <p><strong>{role}</strong></p>
+    </div>
+</Layout>
+
+<style>
+    .case-study {
+        grid-template-columns: repeat(8, 1fr);
+        grid-template-rows: repeat(10, auto);
+        display: grid;
+        width: calc(100% - 48px);
+        margin: 0 auto;
+    }
+    video {
+        grid-row-start: 2;
+        grid-row-end: 4;
+        grid-column-start: 4;
+        grid-column-end: 8;
+        width: 50vw;
+        transform: translateY(-25%);
+        z-index: 0;
+    }
+
+    img {
+        display: flex;
+        width: 25vw;
+        height: auto;
+    }
+
+    img:nth-child(1) {
+        grid-row-start: 1;
+        grid-row-end: 1;
+        grid-column-start: 1;
+        grid-column-end: 1;
+        border-radius: 12px;
+        max-width: 300px;
+    }
+
+    img:nth-child(3) {
+        grid-row-start: 3;
+        grid-row-end: 5;
+        grid-column-start: 2;
+        grid-column-end: 7;
+        z-index: 2
+    }
+
+    img:nth-child(4) {
+        grid-row-start: 5;
+        grid-row-end: 6;
+        grid-column-start: 1;
+        grid-column-end: 4;
+    }
+
+    img:nth-child(5) {
+        grid-row-start: 7;
+        grid-row-end: 9;
+        grid-column-start: 5;
+        grid-column-end: 8;
+        margin-top: 50px;
+    }
+
+    img:nth-child(6) {
+        grid-row-start: 8;
+        grid-row-end: 10;
+        grid-column-start: 2;
+        grid-column-end: 5;
+    }
+
+    p:nth-child(7) {
+        grid-row-start: 5;
+        grid-column-start: 5;
+        grid-column-end: 8;
+        display: flex;
+    }
+
+    p:nth-child(8) {
+        grid-row-start: 1;
+        grid-column-start: 2;
+        grid-column-end: 8;
+        display: flex;
+        margin-inline-start: 1em;
+        font-size: 2em;
+    }
+</style>

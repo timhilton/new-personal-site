@@ -1,11 +1,8 @@
 ---
 import WorkLayout from '../layouts/WorkLayout.astro';
-import Navigation from '../components/Navigation.astro';
 import { contentfulClient } from "../lib/contentful";
-import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
 import type { PortfolioItem } from "../lib/contentful";
 import WorkItem from '../components/WorkItem.astro';
-import TechFilters from '../components/TechFilters.astro';
 
 const title="WORK";
 const links = ['About', 'Contact'];
@@ -14,7 +11,7 @@ const entries = await contentfulClient.getEntries<PortfolioItem>({
     content_type: "portfolioItem",
 });
 
-const items = entries.items.map((item) => {
+let items = entries.items.map((item) => {
     return {
         project: item.fields.project,
         description: item.fields.description,
@@ -22,8 +19,13 @@ const items = entries.items.map((item) => {
         tech: item.fields.tech,
         role: item.fields.role,
         demoUrl: item.fields.demoUrl,
-        imageUrl: item.fields.imageUrl
+        imageUrl: item.fields.imageUrl,
+        caseStudyMedia: item.fields.caseStudyMedia,
     };
+});
+
+items = items.sort((a, b) => {
+    return a.project.localeCompare(b.project);
 });
 
 
@@ -45,7 +47,7 @@ filterList.unshift('all');
         list-style: none;
         flex-wrap: wrap;
         padding: 0;
-        margin: 0;
+        margin: 0 auto;
     
         @media (max-width: 768px) {
             flex-direction: column;
