@@ -37,18 +37,38 @@ const links = ['work', 'about', 'contact'];
     <Navigation title={project} links={links}/>
     <div class="case-study">
         <Image src={imageUrl} alt="picture" width="512" height="512" transition:name={`${slug}-thumbnail`}/>
-        <video src={images[0]} autoplay loop muted playsinline>
+        <video class="scroll" data-speed="1.5" src={images[0]} autoplay loop muted playsinline>
             <source src={images[0]} type="video/mp4" />
         </video>
         {images.map((image, index) => {
             if (index !== 0) {
-                return <Image src={image} alt={`picture-${index}`} width="512" height="512" transition:name={`${slug}-image-${index}`}/>
+                return <Image class="scroll" data-speed="1.75" src={image} alt={`picture-${index}`} width="512" height="512" transition:name={`${slug}-image-${index}`}/>
             }
         })}
         <p>{description}</p>
         <p><strong>{role}</strong></p>
     </div>
 </Layout>
+
+<script type="module">
+        const parallax = () => {
+        const scrollElements = document.querySelectorAll('.scroll');
+
+        window.addEventListener('scroll', () => {
+            const offset = window.scrollY / 10;
+
+            scrollElements.forEach((element, index) => {
+                if(index % 2 === 0) {
+                    element.style.transform = `translateY(-${offset * element.dataset.speed}px)`;
+                } else {
+                    element.style.transform = `translateY(${offset * element.dataset.speed * .5}px)`;
+                }
+            })
+        })
+    };
+
+    parallax();
+</script>
 
 <style>.case-study {
     display: grid;
