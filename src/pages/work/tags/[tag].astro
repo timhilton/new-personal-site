@@ -34,7 +34,7 @@ const { tag } = Astro.params;
 const { items, filters } = Astro.props;
 ---
 
-<WorkLayout filters={filters}>
+<WorkLayout filters={filters} transition:persist>
     <ul class="portfolio-list">
         {items.map((item) => (
             <li transition:name={item.fields.project}><WorkItem project={item.fields.project} description={item.fields.description} slug={item.fields.slug} tech={item.fields.tech} role={item.fields.role} demoUrl={item.fields.demoUrl} imageUrl={item.fields.imageUrl}/></li>
