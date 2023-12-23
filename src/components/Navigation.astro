@@ -25,7 +25,7 @@ const transitionName = `${title.toLowerCase()}`
         })}
     </div>
 </nav>
-<h2 transition:name={transitionName}>{title}</h2>
+<h2 transition:name={transitionName} transition:persist>{title}</h2>
 
 <style>
     h2 {
