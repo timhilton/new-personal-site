@@ -8,7 +8,7 @@
     pointer-events: auto;
     width: calc(100% - 72px);
     max-width: 692px;
-    margin: 24px auto;
+    margin: 48px auto;
 
     @media (max-width: 734px) {
         height: 70%;
@@ -63,7 +63,7 @@ input[name='email'][value='']:invalid:focus {
 }
 
 label {
-    font-family: 'OpenSans';
+    font-family: Roboto, 'Helvetica Neue', sans-serif;
     align-items: center;
     display: flex;
     font-size: 1em;
@@ -99,7 +99,7 @@ button {
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
     color: #565656;
     font-size: 1.5em;
-    font-weight: inherit;
+    font-weight: 400;
     padding: 0.5em 1em;
     text-transform: uppercase;
     transition: 0.3s ease all;
