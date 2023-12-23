@@ -40,6 +40,9 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    letter-spacing: 0.05em;
+    font-weight: 100;
 }
 
 html {
@@ -64,7 +67,6 @@ html {
     background-color: transparent;
     width: 100%;
     margin: 0 auto;
-    font-family: 'Galano', sans-serif;
     color: var(--text);
 
     @media (max-width: 768px) {
@@ -109,9 +111,7 @@ a {
 
 h2 {
     color: var(--text);
-    font-family: 'Galano', sans-serif;
     font-size: 3em;
-    font-weight: 300;
     margin-left: 24px;
 
     @media (max-width: 768px) {
@@ -130,8 +130,6 @@ h2::after {
 }
 
 p {
-    font-family: 'OpenSans', sans-serif;
-    font-weight: light;
     font-size: 1.25em;
     color: var(--text);
     margin-top: 1.25em;
