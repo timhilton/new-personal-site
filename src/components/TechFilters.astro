@@ -1,7 +1,7 @@
 ---
 const {items} = Astro.props;
 ---
-<nav class="filter-nav">
+<nav class="filter-nav" transition:persist>
     <ul class="filter-nav-container">
         {items.map((filter) => {
             if (filter === 'all') {
