@@ -3,27 +3,27 @@
     src: url('/fonts/Vazirmatn-Bold.ttf') format('truetype');
     font-weight: bold;
     font-style: normal;
-    font-display: swap;
+    font-display: optional;
 }
 @font-face {
     font-family: 'Vazirmatn';
     src: url('/fonts/Vazirmatn-Thin.ttf') format('truetype');
     font-weight: thin;
     font-style: normal;
-    font-display: swap;
+    font-display: optional;
 }
 @font-face {
     font-family: 'Galano';
     src: url('/fonts/GalanoGrotesque-Extra-Light.otf') format('opentype');
     font-style: normal;
-    font-display: swap;
+    font-display: optional;
 }
 @font-face {
     font-family: 'OpenSans';
     src: url('/fonts/OpenSans-Regular.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
-    font-display: swap;
+    font-display: optional;
 }
 
 @font-face {
@@ -31,7 +31,7 @@
     src: url('/fonts/OpenSans-Light.ttf') format('truetype');
     font-weight: light;
     font-style: normal;
-    font-display: swap;
+    font-display: optional;
 }
 
 * {
