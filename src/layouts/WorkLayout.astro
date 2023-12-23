@@ -9,8 +9,8 @@ const links = ['About', 'Contact'];
 const { filters } = Astro.props
 
 ---
-<Layout title={title}>
-    <Navigation title={title} links={links} transition:persist/>
-    <TechFilters items={filters} transition:persist/>
+<Layout title={title} transition:persist>
+    <Navigation title={title} links={links}/>
+    <TechFilters items={filters}/>
     <slot/>
 </Layout>
