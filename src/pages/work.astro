@@ -1,7 +1,7 @@
 ---
 import WorkLayout from '../layouts/WorkLayout.astro';
 import { contentfulClient } from "../lib/contentful";
-import type { PortfolioItem } from "../lib/contentful";
+import type { PortfolioItem, BlogItem } from "../lib/contentful";
 import WorkItem from '../components/WorkItem.astro';
 
 const title="WORK";
@@ -10,6 +10,10 @@ const links = ['About', 'Contact'];
 const entries = await contentfulClient.getEntries<PortfolioItem>({
     content_type: "portfolioItem",
 });
+
+const blog = await contentfulClient.getEntries<BlogItem>({
+    content_type: "blogPost",
+})
 
 let items = entries.items.map((item) => {
     return {
@@ -28,6 +32,14 @@ items = items.sort((a, b) => {
     return a.project.localeCompare(b.project);
 });
 
+let explaination = blog.items.map((item) => {
+    return {
+        body: item.fields.body
+    }
+});
+
+console.log(explaination[0].body);
+
 
 let filterList = [...new Set(items.map(item => item.tech).flat())];
 filterList.sort((a, b) => a.localeCompare(b))
@@ -35,6 +47,7 @@ filterList.unshift('all');
 
 ---
 <WorkLayout filters={filterList}>
+    <p>{explaination[0].body}</p>
     <ul class="portfolio-list">
         {items.map((item) => (
             <li transition:name={item.project}><WorkItem project={item.project} description={item.description} slug={item.slug} tech={item.tech} role={item.role} demoUrl={item.demoUrl} imageUrl={item.imageUrl}/></li>
@@ -48,7 +61,7 @@ filterList.unshift('all');
         list-style: none;
         flex-wrap: wrap;
         padding: 0;
-        margin: 0;
+        margin: 24px;
     
         @media (max-width: 768px) {
             flex-direction: column;
@@ -61,5 +74,11 @@ filterList.unshift('all');
             width: 100%;
             position: relative;
         }
+    }
+
+    p {
+        margin-inline-start: 24px;
+        margin-inline-end: 24px;
+        margin-top: 36px;
     }
     </style>

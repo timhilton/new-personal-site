@@ -20,6 +20,14 @@ export interface PortfolioItem {
   }
 }
 
+export interface BlogItem {
+  contentTypeId: 'blogPost',
+  fields: {
+    title: EntryFieldTypes.Text,
+    body: EntryFieldTypes.Text
+  }
+}
+
 export const contentfulClient = contentful.createClient({
   space: import.meta.env.CONTENTFUL_SPACE_ID,
   accessToken: import.meta.env.DEV
