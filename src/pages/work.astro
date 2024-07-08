@@ -38,9 +38,6 @@ let explaination = blog.items.map((item) => {
     }
 });
 
-console.log(explaination[0].body);
-
-
 let filterList = [...new Set(items.map(item => item.tech).flat())];
 filterList.sort((a, b) => a.localeCompare(b))
 filterList.unshift('all');
