@@ -9,11 +9,6 @@ const icons = [
         aria: 'link to github, opens in new tab'
     },
     {
-        name: 'codepen',
-        link: 'https://codepen.io/timhilton',
-        aria: 'link to codepen, opens in new tab'
-    },
-    {
         name: 'linkedin',
         link: 'https://www.linkedin.com/in/timhiltontech/',
         aria: 'link to linkedin, opens in new tab'
@@ -65,7 +60,7 @@ const icons = [
     .built-with {
         flex-basis: 100%;
         width: 100%;
-        height: 4em;
+        height: auto;
         display: flex;
         flex-direction: column;
         align-items: flex-start;
@@ -92,13 +87,9 @@ const icons = [
 
 <footer>
     <div class="footer-content">
-    <div class="built-with">
-        <p class="astro-built"><strong>Built using Astro <A/></strong></p>
-        <p>Best viewed on Chrome on desktop.</p>
-    </div>
-    <p>&#169; {new Date().getFullYear()} Tim Hilton</p>
-    <div class="social">
-    {icons.map((icon) => <a href={icon.link} target="_blank" aria-label={icon.aria}><Icon icon={icon.name}/></a>)}
-    </div>
+        <p>&#169; {new Date().getFullYear()} Tim Hilton</p>
+        <div class="social">
+            {icons.map((icon) => <a href={icon.link} target="_blank" aria-label={icon.aria}><Icon icon={icon.name}/></a>)}
+        </div>
     </div>
 </footer>

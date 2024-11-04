@@ -30,6 +30,7 @@ const elevatorPitchHtml = documentToHtmlString(about);
 <style>
     .about-container {
         display: flex;
+        justify-content: space-between;
         
         @media (max-width: 768px) {
             flex-direction: column-reverse;
@@ -43,7 +44,7 @@ const elevatorPitchHtml = documentToHtmlString(about);
         color: #f5f5f5;
         font-weight: 100;
         letter-spacing: 0.1rem;
-        width: 50%;
+        flex-basis: 100%;
 
         @media (max-width: 768px) {
             width: 87.5%;
@@ -59,19 +60,24 @@ const elevatorPitchHtml = documentToHtmlString(about);
 	.img-wrap {
 		width: 30%;
 		height: 30%;
-		margin-top: -72px;
+		margin-top: -48px;
 		margin-inline-start: 72px;
+        margin-inline-end: 24px;
 		border-radius: 50%;
 		overflow: hidden;
 		z-index: 1;
 		border: 2px solid #f5f5f5;
 
-        @media (max-width: 768px) {
+        @media (max-width: 1024px) {
             width: 25%;
             height: 25%;
-            margin-top: -64px;
-            margin-inline-end: 24px;
-            align-self: flex-end;
+            margin-top: -48px;
+            margin-inline-start: 0;
+            
+        }
+
+        @media (max-width: 768px) {
+            display: none;
         }
 	}
 </style>
